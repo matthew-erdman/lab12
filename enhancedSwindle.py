@@ -1,5 +1,5 @@
 from book import *
-
+import csv
 
 def readBookDatabase(filename):
     """ read in book info from bookdb.txt, save each line as a Book object in list.
@@ -170,6 +170,45 @@ class Swindle(object):
             else:
                 book = self.displayText(self.ownedBooks[bookNum-1])
                 print("\nSetting bookmark in %s at page %i" % (book.getTitle(), book.getBookmark()))
+
+    def save(self, savefile):
+        """ Purpose: Save availability, title, author, year, filename, bookmark for each book to a file. """
+        # Nested list containing the information of each book for csv output
+        allBooks = []
+        # Add available books
+        for book in self.availableBooks:
+            bookInfo = ["available", book.getTitle(), book.getAuthor(), book.getYear(), \
+            book.getFilename(), book.getBookmark()]
+            allBooks.append(bookInfo)
+        # Add owned books
+        for book in self.ownedBooks:
+            bookInfo = ["owned", book.getTitle(), book.getAuthor(), book.getYear(), \
+            book.getFilename(), book.getBookmark()]
+            allBooks.append(bookInfo)
+
+        outfile = open(savefile, "w")
+        csvOut = csv.writer(outfile) # CSV writer
+
+        # Save owner
+        outfile.write(self.owner + "\n")
+        csvOut.writerows(allBooks)
+        outfile.close()
+
+    def load(self, filename):
+        """ read in book info from book save file and update the swindle with it. """
+        infile = open(filename, 'r')
+        self.owner = infile.readline().strip("\n")
+        self.availableBooks = []
+        self.ownedBooks = []
+        for book in infile:
+            # available, title, author, year, filename, bookmark
+            bookInfo = book.strip("\n").split(',')
+            newBook = Book(bookInfo[1], bookInfo[2], int(bookInfo[3]), bookInfo[4])
+            newBook.setBookmark(int(bookInfo[5]))
+            if bookInfo[0] == "available":
+                self.availableBooks.append(newBook)
+            else:
+                self.ownedBooks.append(newBook)
 
 
 

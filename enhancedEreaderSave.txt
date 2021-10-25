@@ -1,0 +1,8 @@
+Matthew Erdman
+available,Mary Had a Little Lamb,Sarah Josepha Hale,1830,book-database/mary-little-lamb.txt,0
+owned,Ulysses,James Joyce,1922,book-database/ulysses.txt,9
+owned,A Tale of Two Cities,Charles Dickens,1857,book-database/tale-of-cities.txt,4
+owned,Pride and Prejudice,Jane Austin,1813,book-database/pride-prejudice.txt,4
+owned,Peter Pan,J. M. Barrie,1922,book-database/peter-pan.txt,2
+owned,Moby Dick,Herman Melville,1851,book-database/moby-dick.txt,0
+owned,Heart of Darkness,Joseph Conrad,1899,book-database/heart-of-darkness.txt,11
